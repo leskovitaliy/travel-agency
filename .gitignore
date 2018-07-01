@@ -139,3 +139,6 @@ fabric.properties
 # Editor-based Rest Client
 .idea/httpRequests
 
+
+.idea
+/package-lock.json
