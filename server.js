@@ -1,4 +1,5 @@
 const express = require('express');
+const fortune = require('./lib/fortune');
 
 const app = express();
 
@@ -17,7 +18,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/about', (req, res) => {
-    res.render('about');
+    res.render('about', { fortune: fortune.getFortune() });
 });
 
 // page 404
