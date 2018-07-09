@@ -1,4 +1,5 @@
 const express = require('express');
+const formidable = require('formidable'); // for upload files
 const fortune = require('./lib/fortune');
 
 const app = express();
@@ -104,6 +105,29 @@ app.post('/process', function(req, res){
         res.redirect(303, '/thank-you' );
     }
 });
+
+app.get('/contest/vacation-photo', (req, res) => {
+    const now = new Date();
+
+    res.render('contest/vacation-photo', {
+        year: now.getFullYear(),
+        month: now.getMonth()
+    })
+});
+
+app.post('/contest/vacation-photo/:year/:month', (req, res) => {
+    const form = new formidable.IncomingForm();
+    form.parse(req, (err, fields, files) => {
+        if (err) {
+            return res.redirect(303, '/error');
+        }
+        console.log('received fields: ');
+        console.log(fields);
+        console.log('received files: ');
+        console.log(files);
+        res.redirect(303, '/thank-you');
+    });
+})
 
 // page 404
 app.use((req, res) => {
